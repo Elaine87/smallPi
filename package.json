@@ -1,0 +1,10 @@
+{
+  "devDependencies": {
+    "cookie-parser": "^1.4.3",
+    "express": "^4.15.4",
+    "http-proxy-middleware": "^0.17.4"
+  },
+  "dependencies": {
+    "express-http-proxy": "^1.0.6"
+  }
+}

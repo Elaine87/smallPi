@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalabel=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>价格说明</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        .mod-price {
+            font-size: 14px;
+            color: #666;
+            padding: 20px 15px;
+        }
+        
+        .tabs {
+            color: #333;
+            font-size: 13px;
+            margin-bottom: 20px;
+        }
+        
+        .tabs__lists {
+            display: flex;
+            height: 60px;
+            align-items: center;
+        }
+        
+        .tabs__lists li {
+            width: 60px;
+            height: 60px;
+            margin-right: 15px;
+            border-radius: 50%;
+            line-height: 60px;
+            background: #d6d6d6;
+            text-align: center;
+            list-style: none;
+        }
+        
+        .tabs__lists li.active {
+            background: #9b0000;
+            color: #fff;
+        }
+        
+        .price__table {
+            width: 100%;
+            border-collapse: collapse;
+            border: 1px solid #dfdfdf;
+        }
+        
+        .price__table th {
+            height: 40px;
+            line-height: 40px;
+        }
+        
+        .price__table tr {
+            line-height: 24px;
+        }
+        
+        .price__table tr td {
+            text-align: center;
+            padding: 5px;
+        }
+        
+        .price__table th:first-child {
+            color: #9b0000;
+            padding: 0 10px;
+            box-sizing: border-box;
+            width: 120px;
+            text-align: left;
+        }
+        
+        .price__table tr td:first-child {
+            text-align: left;
+            padding: 0 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="mod-price">
+        <div class="tabs">
+            <ul class="tabs__lists">
+                <li class="list active">即时用车</li>
+                <li class="list">预约用车</li>
+                <li class="list">日租</li>
+                <li class="list">半日租</li>
+            </ul>
+        </div>
+        <div class="tab-pannel">
+            <table class="price__table" border=1>
+                <thead>
+                    <tr>
+                        <th>半日租</th>
+                        <th>舒适型</th>
+                        <th>商务7座</th>
+                        <th>商务福祉车</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>基础价（元）</td>
+                        <td>398</td>
+                        <td>458</td>
+                        <td>498</td>
+                    </tr>
+
+                    <tr>
+                        <td>公里数（含）</td>
+                        <td>50</td>
+                        <td>40</td>
+                        <td>10</td>
+                    </tr>
+
+                    <tr>
+                        <td>基础时长（含）</td>
+                        <td>23</td>
+                        <td>35</td>
+                        <td>56</td>
+                    </tr>
+
+                    <tr>
+                        <td>超里程费（元/公里）</td>
+                        <td>120</td>
+                        <td>456</td>
+                        <td>333</td>
+                    </tr>
+
+                    <tr>
+                        <td rowspan=2 "">超时长费(元/分钟)</td>
+                        <td>111</td>
+                        <td>111</td>
+                        <td>233</td>
+                    </tr>
+                    <tr>
+                        <td>23</td>
+                        <td>34</td>
+                        <td>45</td>
+                    </tr>
+                    <tr>
+                        <td>等候费（元/分钟）</td>
+                        <td>222</td>
+                        <td>333</td>
+                        <td>444</td>
+                    </tr>
+
+                    <tr>
+                        <td>回空里程（公里）</td>
+                        <td>444</td>
+                        <td>222</td>
+                        <td>111</td>
+                    </tr>
+
+                    <tr>
+                        <td>长途费</td>
+                        <td>50公里以上10/公里</td>
+                        <td>50公里以上50/公里</td>
+                        <td>50公里以上100/公里</td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+<script>
+    var tablLists = document.querySelectorAll('.list');
+    Array.from(tablLists).forEach(function(item, index) {
+        item.addEventListener('click', function(e) {
+
+        }, false)
+    })
+</script>
+
+</html>

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>投诉</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        textarea {
+            -webkit-appearance: none;
+        }
+        
+        html,
+        body {
+            background-color: #f2f2f2;
+        }
+        
+        textarea::-webkit-input-placeholder {
+            /* WebKit browsers */
+            color: #999;
+        }
+        
+        textarea:-moz-placeholder {
+            /* Mozilla Firefox 4 to 18 */
+            color: #999;
+        }
+        
+        textarea::-moz-placeholder {
+            /* Mozilla Firefox 19+ */
+            color: #999;
+        }
+        
+        textarea::-ms-input-placeholder {
+            /* Internet Explorer 10+ */
+            color: #999;
+        }
+        
+        .mod-complain {
+            padding: 0 15px;
+        }
+        
+        .complainForm {
+            border: 1px solid #e8e9e9;
+            border-width: 0 1px 1px;
+            /* padding: 0 0 20px; */
+            background: #fff;
+            font-size: 12px;
+            color: #666;
+            line-height: 2.5em;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        
+        .titleCom {
+            color: #999;
+            line-height: 1;
+            margin: 10px 15px;
+            font-size: 13px;
+        }
+        
+        .comp__classify {
+            padding: 5px 0 5px 15px;
+            border: 1px solid #e8e9e9;
+            border-width: 1px 0;
+            font-size: 14px;
+            line-height: 2.5em;
+        }
+        
+        .comp__list li {
+            padding-left: 15px;
+            line-height: 34px;
+            list-style: none;
+        }
+        
+        .comp__list li input[type='radio'] {
+            vertical-align: middle;
+            margin-right: 5px;
+        }
+        
+        .comp__otherArea {
+            border: 1px solid #e8e9e9;
+            display: block;
+            width: 92%;
+            margin: 10px auto 20px;
+            resize: none;
+            height: 70px;
+            overflow: auto;
+            line-height: 24px;
+            padding-left: 10px;
+            box-sizing: border-box;
+            outline: none 0;
+            color: #666;
+            box-shadow: 0;
+            font-size: 14px;
+        }
+        
+        .comp__btn {
+            display: block;
+            width: 92%;
+            text-align: center;
+            font-size: 14px;
+            color: #fff;
+            background: #5bbfb5;
+            line-height: 1;
+            padding: 20px;
+            border: 0;
+            border: 1px solid #e8e9e9;
+            box-sizing: border-box;
+            margin: 15px auto;
+            outline: none;
+            border-radius: 4px;
+        }
+        
+        .com_btn_disabled {
+            background: #f7f7f7;
+            cursor: not-allowed;
+            color: rgba(0, 0, 0, .25);
+        }
+        
+        .service__tel {
+            font-size: 12px;
+            text-align: center;
+            margin: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="mod-complain" id="complain">
+        <h4 class="titleCom">问题投诉</h4>
+        <form class="complainForm">
+            <template v-for="(item,index) in complianNoticeTab">
+                <h5 class="comp__classify">{{item.noticeTitile}}</h5>
+                <ul class="comp__list">
+                    <li v-for="(subItem,subIndex) in item.noticeTabs">
+                        <input type="radio" 
+                            :id="index+'-'+subIndex" 
+                            :value="subItem"
+                            v-model="picked"
+                            name="passengerChr"><label :for="index+'-'+subIndex">{{subItem}}</label>
+                    </li>
+                    <li class="comp__classify" v-if="index==1">
+                        <input type="radio"
+                        value="其他" 
+                        name="passengerChr"
+                        v-model="picked" 
+                        id="other"><label for="other">其他</label></li>
+                </ul>
+            </template>
+            <textarea name="otherArea" class="comp__otherArea" id="otherArea" v-model="message" placeholder="告诉我们更多帮助更快核实"></textarea>
+            <button :disabled="isValidateForm" :class="{'comp__btn':true,'com_btn_disabled':isValidateForm}">匿名提交</button>
+        </form>
+        <div class="service__tel">客服电话</div>
+    </div>
+    <script src="../util/flexible.js"></script>
+    <script src="https://cdn.bootcss.com/axios/0.16.0/axios.min.js"></script>
+    <script src="https://cdn.bootcss.com/vue/2.4.3/vue.min.js"></script>
+    <script src="../util/index.js"></script>
+    <script>
+        // alert(window.location.search.slice(1))
+        var app = new Vue({
+            el: '#complain',
+            data: function() {
+                return {
+                    complianNoticeTab: [],
+                    complainStatus: null,
+                    picked: '',
+                    message: ''
+
+                }
+            },
+            computed: {
+                isValidateForm() {
+                    return !this.picked.length > 0;
+                }
+            },
+            created: function() {
+                const self = this;
+
+                axios.get('/api/complain').then((data) => {
+                    console.log(data.statusText);
+                    if (data.status == 200) {
+                        // console.log( data.data);
+                        let {
+                            code,
+                            errMsg,
+                            result
+                        } = data.data;
+
+                        if (code == 0) {
+                            this.complianNoticeTab = result.data.complianNoticeTab;
+                            this.complainStatus = result.data.complainStatus;
+                        }
+
+                    } else {
+                        throw new Error('request is faild,status:' + data.status + '---statusText:' + data.statusText)
+                    }
+                }).catch((err) => {
+                    console.log(err);
+                })
+            }
+        })
+    </script>
+</body>
+
+</html>

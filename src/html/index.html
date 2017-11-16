@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>客服中心</title>
+    <style>
+        *{margin:0; padding:0}
+        html,body{
+            background: #f2f2f2;
+        }
+        .customCenter{
+            margin-top: 20px;
+            font-size: 14px;
+            color: #666;
+            line-height: 2.5em;
+            border-bottom:1px solid #e8e9e9;
+        }
+        .customCenter a{
+            color: #333;
+            text-decoration: none;
+            display: block;
+        }
+        h4{
+            color: #333;
+            border:1px solid #e8e9e9;
+            border-width: 1px 0 0 ;
+            background: #fff;
+            padding:0 15px;
+            position: relative;
+        }
+        .guessLists li{
+            list-style: none;
+            border:1px solid #e8e9e9;
+            border-width: 1px 0 0 ;
+            background: #fff;
+            padding:0 15px;
+        }
+        .guessLists li a{
+            color: #666;
+        }
+        .guessQus{
+            margin-bottom: 10px;
+            border-bottom:1px solid #e8e9e9;
+        }
+        .arrrow{
+            display: inline-block;
+            width: 7px;
+            height: 7px;
+            border: 2px solid #666;
+            transform: rotate(-45deg);
+            position: absolute;
+            top: 12px;
+            border-left: 0;
+            border-top: 0;
+            right: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="customCenter">
+        <div class="guessQus">
+            <h4>猜你想问</h4>
+            <ul class="guessLists">
+                <li><a>需要开具发票</a></li>
+                <li><a>司机不认路</a></li>
+                <li><a>司机添加其他费用</a></li>
+            </ul>
+        </div>
+        <div class="mormalQus"><h4><a>常见问题<i class="arrrow"></i></a></h4></div>
+        <div class="softQus"><h4><a href="./usageQuestion.html">软件使用问题<i class="arrrow"></i></a></h4></div>
+        <div class="invoiceQus"><h4><a>发票问题<i class="arrrow"></i></a></h4></div>
+        <div class="paymentQus"><h4><a>支付问题<i class="arrrow"></i></a></h4></div>
+    </div>
+</body>
+</html>
